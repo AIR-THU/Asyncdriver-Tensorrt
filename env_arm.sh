@@ -26,8 +26,21 @@ echo "==== Step 3: Link TensorRT and OpenCV from system to Conda env ===="
 PYVER=3.8
 CONDA_SITEPKG="$CONDA_PREFIX/lib/python${PYVER}/site-packages"
 
-ln -sf /usr/lib/python${PYVER}/dist-packages/tensorrt "${CONDA_SITEPKG}/tensorrt"
-ln -sf /usr/lib/python${PYVER}/dist-packages/cv2 "${CONDA_SITEPKG}/cv2"
+# Tensorrt
+if [ -e "${CONDA_SITEPKG}/tensorrt" ]; then
+    echo "tensorrt already linked, skipping."
+else
+    echo "Linking tensorrt..."
+    ln -sf "/usr/lib/python${PYVER}/dist-packages/tensorrt" "${CONDA_SITEPKG}/tensorrt"
+fi
+
+# OpenCV (cv2)
+if [ -e "${CONDA_SITEPKG}/cv2" ]; then
+    echo "cv2 already linked, skipping."
+else
+    echo "Linking cv2..."
+    ln -sf "/usr/lib/python${PYVER}/dist-packages/cv2" "${CONDA_SITEPKG}/cv2"
+fi
 
 echo "==== Step 4: Install Jetson-compatible Deep Learning packages ===="
 pip install \
@@ -117,4 +130,4 @@ pip install \
     polygraphy
     --no-cache-dir
 
-echo "✅ All steps completed successfully!"
+echo "All steps completed successfully!"

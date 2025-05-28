@@ -199,7 +199,7 @@ The table below compares the inference times of the LoRA-finetuned LLaMA compone
 
 | Inference Method            | Time (s) |
 |-----------------------------|---------:|
-| PyTorch (FP16)              |   0.3250 |
+| PyTorch (Linear4bit)        |   0.3250 |
 | ONNX Runtime (FP16)         |   0.1265 |
 | ONNX Runtime (FP32)         |   0.1960 |
 | TensorRT (FP16)             |   0.1016 |
