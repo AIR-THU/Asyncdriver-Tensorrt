@@ -78,7 +78,14 @@ git clone https://github.com/memberRE/AsyncDriver.git && cd AsyncDriver
   ```bash
   bash env_arm.sh
   ```
+- **OpenCV Loading Issue (LD_PRELOAD Fix)**
 
+  If you encounter OpenCV runtime loading errors, set the following environment variable before running your program:
+
+  ```bash
+  export LD_PRELOAD="/lib/aarch64-linux-gnu/libffi.so.7.1.0 \
+  /lib/aarch64-linux-gnu/libgio-2.0.so.0"
+  ```
 ---
 
 - **For x86_64:**
@@ -182,28 +189,21 @@ Follow the steps in [Section 2: Evaluation](#2-evaluation) to run model inferenc
 >
 > Due to limited support for LoRA fine-tuning in JetPack 5.1.2, it is recommended to **export the ONNX model on an x86 host machine** and then transfer the exported model to the Orin device.
 >
-> Once transferred, use the following command to sanitize the ONNX file and improve compatibility:
->
-> ```bash
-> polygraphy surgeon sanitize /path/to/input_model.onnx \
->     --fold-constants \
->     -o /path/to/output_model_sanitized.onnx
-> ```
->
-> You can then generate the TensorRT engine using the sanitized ONNX file by following the steps above.
+> Once transferred, you can then generate the TensorRT engine by the steps above.
 
+#### LLaMA Inference Performance on NVIDIA Jetson AGX Orin
 
-#### Performance on NVIDIA Jetson Orin
+The following table presents the inference latency of the LoRA-finetuned LLaMA component used in **AsyncDriver**, tested on **NVIDIA Jetson AGX Orin** under **performance mode**. The comparison includes different inference backends and precision settings.
 
-The table below compares the inference times of the LoRA-finetuned LLaMA component within AsyncDriver on Jetson Orin across different inference backends and precisions:
-
-| Inference Method            | Time (s) |
+| Inference Backend           | Time (s) |
 |-----------------------------|---------:|
 | PyTorch (Linear4bit)        |   0.3250 |
 | ONNX Runtime (FP16)         |   0.1265 |
 | ONNX Runtime (FP32)         |   0.1960 |
 | TensorRT (FP16)             |   0.1016 |
 | TensorRT (FP32)             |   0.2149 |
+
+> All measurements were conducted on Jetson AGX Orin with the device set to **performance mode**.
 
 ### 4. Training
 

@@ -22,7 +22,6 @@ echo "==== Step 2: Upgrade pip ===="
 pip install pip==24.0 --no-cache-dir
 
 echo "==== Step 3: Link TensorRT and OpenCV from system to Conda env ===="
-# Replace with your actual Python version if not 3.8
 PYVER=3.8
 CONDA_SITEPKG="$CONDA_PREFIX/lib/python${PYVER}/site-packages"
 
@@ -81,7 +80,7 @@ pip install \
     control==0.9.1 \
     coverage \
     docker \
-    geopandas>=0.12.1 \
+    geopandas==0.12.1 \
     grpcio==1.43.0 \
     grpcio-tools==1.43.0 \
     guppy3==3.1.2 \
@@ -102,7 +101,7 @@ pip install \
     pyarrow \
     pyinstrument \
     pyogrio \
-    pyquaternion>=0.9.5 \
+    pyquaternion==0.9.5 \
     pytest \
     rasterio \
     ray \
@@ -113,7 +112,7 @@ pip install \
     scipy \
     selenium \
     setuptools==59.5.0 \
-    Shapely>=2.0.0 \
+    Shapely==2.0.0 \
     SQLAlchemy==1.4.27 \
     sympy \
     testbook \
