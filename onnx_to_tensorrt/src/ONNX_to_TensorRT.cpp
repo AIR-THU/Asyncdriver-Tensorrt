@@ -41,7 +41,7 @@ int main(int argc, char* argv[]) {
     config->setMemoryPoolLimit(MemoryPoolType::kWORKSPACE, 2ULL << 30);
 
     config->setFlag(nvinfer1::BuilderFlag::kFP16);  // Enable FP16 precision (float32 fallback)
-    config->clearFlag(nvinfer1::BuilderFlag::kSTRICT_TYPES);
+    // config->clearFlag(nvinfer1::BuilderFlag::kSTRICT_TYPES);
     config->setFlag(BuilderFlag::kPREFER_PRECISION_CONSTRAINTS);
     config->setTacticSources(1U << static_cast<int>(TacticSource::kCUBLAS));  // Use only cuBLAS for tactic selection
     // config->setMinTimingIterations(1);
