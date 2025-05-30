@@ -35,6 +35,11 @@ Clone this repository and navigate to the project directory:
 ```
 git clone https://github.com/memberRE/AsyncDriver.git && cd AsyncDriver
 ```
+If you want to deploy on NVIDIA Jetson Orin, please switch to the orin_tensorrt branch:
+
+```
+git checkout orin_tensorrt
+```
 
 #### Step 4: Set up the Conda Environment
 
@@ -187,13 +192,13 @@ Follow the steps in [Section 2: Evaluation](#2-evaluation) to run model inferenc
 
 > **Note for NVIDIA Jetson Orin (ARM64):**
 >
-> Due to limited support for LoRA fine-tuning in JetPack 5.1.2, it is recommended to **export the ONNX model on an x86 host machine** and then transfer the exported model to the Orin device.
+> Due to limited support for LoRA fine-tuning in JetPack 5.1.2, it is recommended to **export the ONNX model on an x86 host machine** and then transfer the exported model to the NVIDIA Jetson Orin device.
 >
 > Once transferred, you can then generate the TensorRT engine by the steps above.
 
 #### LLaMA Inference Performance on NVIDIA Jetson AGX Orin
 
-The following table presents the inference latency of the LoRA-finetuned LLaMA component used in **AsyncDriver**, tested on **NVIDIA Jetson AGX Orin** under **performance mode**. The comparison includes different inference backends and precision settings.
+The following table presents the inference latency of the LoRA-finetuned LLaMA component used in **AsyncDriver**, tested on NVIDIA **Jetson AGX Orin** under **mode_50W** power mode. The comparison includes different inference backends and precision settings.
 
 | Inference Backend           | Time (s) |
 |-----------------------------|---------:|
@@ -202,8 +207,6 @@ The following table presents the inference latency of the LoRA-finetuned LLaMA c
 | ONNX Runtime (FP32)         |   0.1960 |
 | TensorRT (FP16)             |   0.1016 |
 | TensorRT (FP32)             |   0.2149 |
-
-> All measurements were conducted on Jetson AGX Orin with the device set to **performance mode**.
 
 ### 4. Training
 
